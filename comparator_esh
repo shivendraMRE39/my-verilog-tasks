@@ -1,0 +1,11 @@
+module comparator_with_xor_logic(
+input [7:0]a,
+input [7:0]b,
+output greater, lesser, equal
+    );
+    
+    assign equal = ~|(a^b);
+    assign greater = (a > b);
+    assign lesser = ( b > a);
+    
+endmodule
