@@ -1,0 +1,31 @@
+`timescale 1ns / 1ps
+
+module tb_f5_with50_per_cent_dtc;
+
+    reg clk;
+    reg rst;
+    wire f_5_with_50;
+
+   
+    f5_with50_per_cent_dtc dut (
+        .clk(clk),
+        .rst(rst),
+        .f_5_with_50(f_5_with_50)
+    );
+
+   
+    initial begin
+        clk = 0;
+        rst = 0; 
+    end
+        always #5 clk = ~clk;
+
+    initial begin
+        rst = 1'b1;
+        #50;              
+        rst = 1'b0;
+        #400;           
+         $finish;
+    end
+
+endmodule
