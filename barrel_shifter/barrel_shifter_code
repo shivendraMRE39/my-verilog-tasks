@@ -1,0 +1,21 @@
+module barrel_shifter_me (
+    input  signed [31:0] data_in,
+    input  [4:0] control,   // shift amount 0-31
+    input  airtm,           // 1 = arithmetic
+    input  logc,            // 1 = logical right
+    output reg [31:0] data_out
+);
+
+always @(*) begin
+    case ({airtm, logc})
+
+        2'b00: data_out = data_in << control;      // Logical left and airtm left(both magnitude are same)
+        2'b01: data_out = data_in >> control;      // Logical right
+        2'b10: data_out = data_in >>> control;     // Arithmetic right
+       
+        default: data_out = data_in;
+
+       endcase
+       end
+
+endmodule
