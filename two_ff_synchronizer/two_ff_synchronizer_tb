@@ -1,0 +1,52 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 02/04/2026 03:47:25 AM
+// Design Name: 
+// Module Name: two_ff_syncrh_tb
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module two_ff_syncrh_tb(
+
+    );
+    reg clk2_tb, data_in_tb, rst_tb;
+    wire qb2_tb;
+    
+    two_ff_synchronize_me dut( clk2_tb, data_in_tb, rst_tb, qb2_tb);
+    
+    initial 
+    begin 
+    {data_in_tb, rst_tb, clk2_tb} = 0;
+    end 
+    
+    always #5 clk2_tb = ~clk2_tb;
+    initial  
+    begin 
+    #10 rst_tb = 1'b1; 
+    #10 data_in_tb = 1'b0;
+    
+    #10 rst_tb = 1'b0;
+    #10 data_in_tb = 1'b0;
+    
+    #100 $finish;
+    
+    end 
+    
+    
+    
+    
+endmodule
