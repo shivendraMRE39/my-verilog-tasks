@@ -1,0 +1,52 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 01/29/2026 06:34:43 PM
+// Design Name: 
+// Module Name: rising_edge_tb
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module rising_edge_tb(
+
+    );  
+    reg  sgnl_tb;
+    reg clk_tb;
+    wire pe_tb;
+    
+    rising_edge dut ( sgnl_tb, clk_tb, pe_tb);
+    
+    initial 
+     begin 
+   {  sgnl_tb, clk_tb} = 0;
+   
+   end 
+   
+   
+   always #5 clk_tb = ~clk_tb;
+  initial 
+  begin 
+  $monitor("the block is rising or falling %b", pe_tb);
+  
+    #10 sgnl_tb = 1'b1;
+    #10 sgnl_tb = 1'b0; 
+    #10 sgnl_tb = 1'b1;
+    #10 sgnl_tb = 1'b1;
+    #10 sgnl_tb = 1'b0;
+    #500 $finish;
+   end  
+    
+endmodule
