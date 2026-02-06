@@ -1,0 +1,54 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 02/04/2026 05:19:44 PM
+// Design Name: 
+// Module Name: clock_gating_tb
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module clock_gating_tb(
+
+    );
+    reg clk_tb;
+    reg rst_tb;
+    reg enb_tb;
+    wire gateclk_tb;
+    
+    clock_gating_controller dut (clk_tb, rst_tb, enb_tb, gateclk_tb);
+    
+      initial 
+    begin 
+    {clk_tb, rst_tb, enb_tb} = 0;
+    end 
+    
+    always #5 clk_tb = ~clk_tb;
+    
+    initial 
+    begin 
+    #10 rst_tb = 1'b0;
+    #10 enb_tb = 1'b0;
+    #10 enb_tb = 1'b1;
+    
+    #20 rst_tb = 1'b1;
+    #10 enb_tb = 1'b1;
+    #10 enb_tb = 1'b0;
+    
+    #100 $finish;
+    
+    end 
+    
+endmodule

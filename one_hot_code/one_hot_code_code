@@ -1,0 +1,28 @@
+
+module one_hot_code_to_binary(
+input [7:0] one_hot_encode, clk , rst,
+output reg [2:0] binary
+  );
+
+ integer i;
+    
+    always@(posedge clk or negedge rst)
+    begin 
+    
+   if (!rst)
+   begin  
+   binary <= 3'b000;  
+   end     
+    else 
+    begin 
+    binary <= 3'b000;
+    for( i=0; i<8; i=i+1)
+    begin
+     if(one_hot_encode[i] == 1)
+      
+     binary <= i[2:0];
+ 
+    end 
+    end
+    end
+endmodule

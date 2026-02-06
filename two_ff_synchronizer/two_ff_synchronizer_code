@@ -1,0 +1,25 @@
+module two_ff_synchronize_me(
+input clk2, data_in,rst,    //clk2 is 2nd clock domain 
+output  reg qb2);
+
+reg qb1;    // output of ff1
+
+always@(posedge clk2)
+ begin 
+if(rst)
+begin 
+  qb1 <= 1'b0;
+  qb2 <= 1'b0;
+end 
+
+else 
+begin 
+qb1 <= data_in;
+qb2 <= qb1;
+end 
+
+end 
+
+
+
+endmodule

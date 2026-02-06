@@ -1,0 +1,59 @@
+`timescale 1ns / 1ps
+
+
+
+module f5_with50_per_cent_dtc(
+input clk, rst, 
+output f_5_with_50
+    );
+    reg [2:0] count_1;
+    reg [2:0] count_2;
+  
+         
+    always@(posedge clk)
+    begin 
+    if(rst)
+    begin 
+    count_1 <= 3'b001;
+    end 
+    
+    else if (count_1 == 3'b101)
+     begin 
+     count_1 <= 3'b001;
+     end 
+     
+     else
+     begin 
+     count_1 <= count_1 + 1'b1;
+     end 
+     end 
+     
+     always@(negedge clk)
+     begin 
+     if (rst)
+     begin 
+     count_2 <= 3'b001;
+     end 
+     
+     else if (count_2 == 3'b101)
+     begin 
+     count_2 <= 3'b001;
+     end 
+     
+   else 
+   begin 
+   count_2 <= count_2 + 1'b1;
+   end 
+   end 
+   
+// mod 5, starting with 001 becaue till 101 it's msb has 40% duty cycle . 
+// and posedge used, similary negedge used to shift by half clock cycle 
+// after that took or of both the edges count_1 and count_2 of msb. it gave 50% duty cycle
+ 
+   
+  assign  f_5_with_50 = count_1[2] | count_2[2];
+  
+   
+     
+    
+endmodule

@@ -1,0 +1,15 @@
+
+module rising_edge(
+input sgnl, 
+input clk, 
+output  pe   );
+
+reg previous;
+always@(posedge clk)
+begin 
+previous <= sgnl ;
+end 
+ 
+ assign pe = ~previous & sgnl;
+ 
+endmodule

@@ -1,0 +1,71 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 02/05/2026 12:09:16 AM
+// Design Name: 
+// Module Name: one_cycle_to_n_cycle
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module one_cycle_to_n_cycle #(parameter N = 5)// N could be anything upto 6 bits 
+(input clk, rst, pulse_in, 
+output  reg pulse_out
+    );
+    
+    reg [5:0]count;
+    reg running;        // check ki pulse aa rhi hai ya nhi 
+    
+    always@(posedge clk or negedge rst)
+    begin 
+    if(!rst)       // active low reset
+    begin 
+    pulse_out <= 1'b0; 
+    count <= 5'b0;
+    running <= 1'b0;  
+     // abhi koi pulse nhi aa rhi hai // sab kuch band
+    end 
+    
+    else if( pulse_in && !running)   // pulse aa chuki hai lekin run nhi ho rhi hai 
+    begin 
+     pulse_out <= 1;        
+     count <= 0;
+     running <= 1;    
+    end 
+    
+    else if(running) 
+    begin 
+      pulse_out <= ~pulse_out;
+    if(pulse_out)begin 
+    count <= count +1'b1;
+     
+  end 
+    if(count == N)
+    begin 
+    pulse_out <= 1'b0;
+      running <= 1'b0;
+      count <= 0;
+      end 
+   
+    end  
+     else begin
+            pulse_out <= 1'b0;      
+     end 
+    end 
+    
+    
+   
+endmodule
+

@@ -1,0 +1,13 @@
+module falling_edge_detector(
+input clk,
+input sgnl,
+output falling
+);
+  reg previous ;  
+always@(posedge clk)
+begin 
+  previous <= sgnl;
+  end 
+  
+  assign falling = ~sgnl & previous ;
+endmodule

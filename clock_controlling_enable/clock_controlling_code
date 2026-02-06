@@ -1,0 +1,20 @@
+
+module clock_gating_controller(
+input clk, rst,enb, 
+output gateclk
+    );
+    reg enb_latch; 
+   always@(posedge clk or negedge rst)
+   begin 
+   if (!rst)begin     // active low reset
+   enb_latch <= 1'b0;
+   end 
+   else begin 
+   enb_latch <= enb;
+   end 
+   end 
+   
+   assign gateclk = enb_latch & clk;
+   
+   
+endmodule

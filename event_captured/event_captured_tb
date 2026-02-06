@@ -1,0 +1,62 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 02/04/2026 06:37:15 PM
+// Design Name: 
+// Module Name: event_captured_tb
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module event_captured_tb(
+
+    );
+    
+reg clk_tb;
+reg rst_tb;
+reg event_01_tb;
+wire event_check_tb;
+
+ event_captured dut ( clk_tb, rst_tb, event_01_tb, event_check_tb);
+ 
+ initial 
+ begin 
+ { clk_tb,  event_01_tb } = 0;
+ rst_tb = 1;
+ end 
+ 
+ always #5 clk_tb = ~clk_tb;
+ 
+ initial 
+ begin 
+ 
+ #10 rst_tb = 1'b0;
+ #10 event_01_tb = 1'b0;
+ #10 event_01_tb = 1'b1;
+ #10 event_01_tb = 1'b1;
+ #10 event_01_tb = 1'b0;
+ 
+ #10 rst_tb = 1'b1;
+ #10 rst_tb = 1'b0;
+ #10 event_01_tb = 1'b0;
+ #10 event_01_tb = 1'b1;
+ #10 event_01_tb = 1'b0;
+ 
+ 
+ 
+ #100 $finish;
+ 
+ end 
+endmodule

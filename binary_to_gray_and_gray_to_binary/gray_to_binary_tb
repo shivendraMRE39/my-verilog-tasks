@@ -1,0 +1,26 @@
+`timescale 1ns / 1ps
+
+
+
+module gray_to_binary_tb(
+
+    );
+    reg [7:0] gray_tb;
+    wire  [7:0] binary_tb;
+    
+    gray_to_binary dut( gray_tb, binary_tb);
+    
+    initial 
+    begin 
+    {gray_tb} = 0;
+    end 
+    
+    initial 
+    begin 
+    $monitor("binary code of our gray code is %b", binary_tb);
+    #10 gray_tb = 8'b1100_1010;
+     #10 gray_tb = 8'b0101_1011;
+       #10 gray_tb = 8'b0100_1110;  
+       #50 $finish;
+       end 
+endmodule

@@ -1,0 +1,34 @@
+`timescale 1ns / 1ps
+
+
+
+module four_bit_counter_tb(
+
+    );
+    reg clk_tb;
+    reg rst_tb;
+    reg enb_tb;   //upcount ke liye hai 
+    wire [3:0] count_tb;
+    
+     
+     four_bit_updown_counter dut(clk_tb, rst_tb, enb_tb, count_tb);
+     
+     initial 
+     begin 
+      {clk_tb, enb_tb} = 0;
+      rst_tb = 1'b1;
+      end 
+      
+      always #5 clk_tb = ~clk_tb;
+      initial 
+      begin 
+      #10 rst_tb = 1'b0;
+   #10 enb_tb = 1'b1;       //upcount 
+  #170 enb_tb = 1'b0;         //downcount 
+   #330  rst_tb = 1'b1;
+    
+  
+#10  $finish;
+     end 
+     
+endmodule
