@@ -1,5 +1,5 @@
 module barrel_shifter_me (
-    input  signed [31:0] data_in,
+    input  [31:0] data_in,
     input  [4:0] control,   // shift amount 0-31
     input  airtm,           // 1 = arithmetic
     input  logc,            // 1 = logical right
